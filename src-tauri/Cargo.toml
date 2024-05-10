@@ -28,9 +28,9 @@ serde = { version = "1.0", features = ["derive"] }
 tokio = { version = "1.23.0", features = ["macros"] }
 tauri = { version = "1.6.5", features = ["devtools", "dialog-all", "fs-create-dir", "fs-exists", "fs-read-dir", "fs-read-file", "fs-remove-dir", "fs-remove-file", "fs-write-file", "global-shortcut", "global-shortcut-all", "os-all", "path-all", "process-all", "shell-all", "shell-open-api", "system-tray", "updater"] }
 tauri-plugin-positioner = { git = "https://github.com/tauri-apps/plugins-workspace", features = ["system-tray"] }
-tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev", features = ["colored"] }
-tauri-plugin-autostart = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev" }
-tauri-plugin-window-state = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev" }
+tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v2", features = ["colored"] }
+tauri-plugin-autostart = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v2" }
+tauri-plugin-window-state = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v2" }
 
 # sqlx = { version = "0.6.2", features = ["runtime-tokio-rustls", "sqlite"] }
 
