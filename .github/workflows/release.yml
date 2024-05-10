@@ -11,6 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        include:
           - build: windows
             os: windows-latest
             arch: x86_64

@@ -7,7 +7,7 @@
   },
   "package": {
     "productName": "ChatGPT",
-    "version": "1.1.101"
+    "version": "1.1.102"
   },
   "tauri": {
     "allowlist": {
@@ -134,7 +134,7 @@
       "endpoints": [
         "https://lencx.github.io/ChatGPT/install.json"
       ],
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEIxMjY4OUI5MTVFNjBEMDUKUldRRkRlWVZ1WWttc1NGWEE0RFNSb0RqdnhsekRJZTkwK2hVLzhBZTZnaHExSEZ1ZEdzWkpXTHkK"
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDRDRDkyRjkwNzNBMzM2M0MKUldROE5xTnprQy9aVFB1VTlhV2RISDltWk5lWkc1VUxraDJYYXNNeDhQQlBqc0ZJc05hVGVGVW0K"
     }
   }
 }
