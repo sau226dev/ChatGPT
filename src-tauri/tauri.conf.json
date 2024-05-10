@@ -98,7 +98,7 @@
             "main",
             "tray"
           ],
-          "domain": "chat.openai.com",
+          "domain": "chatgpt.com",
           "enableTauriAPI": true
         },
         {

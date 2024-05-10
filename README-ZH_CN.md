@@ -196,7 +196,7 @@ sudo xattr -r -d com.apple.quarantine /YOUR_PATH/ChatGPT.app
 
 ### 它是否安全？
 
-它是安全的，仅仅只是对 [OpenAI ChatGPT](https://chat.openai.com) 网站的包装，注入了一些额外功能（均在本地，未发起网络请求），如果存疑，可以检查源代码。
+它是安全的，仅仅只是对 [OpenAI ChatGPT](https://chatgpt.com) 网站的包装，注入了一些额外功能（均在本地，未发起网络请求），如果存疑，可以检查源代码。
 
 ### 开发者未验证?
 

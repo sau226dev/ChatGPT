@@ -18,7 +18,7 @@ const SwitchOrigin: FC<SwitchOriginProps> = ({ name }) => {
   const originName = `${name}_origin`;
   const isEnable = Form.useWatch(dashboardName, form);
 
-  let urlList = [{ title: 'ChatGPT', url: 'https://chat.openai.com', init: true }];
+  let urlList = [{ title: 'ChatGPT', url: 'https://chatgpt.com', init: true }];
   if (Array.isArray(list)) {
     urlList = urlList.concat(list);
   }

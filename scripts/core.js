@@ -83,7 +83,7 @@ function coreInit() {
         topDom.id = 'chatgpt-app-window-top';
         document.body.appendChild(topDom);
 
-        if (window.location.host === 'chat.openai.com') {
+        if (window.location.host === 'chatgpt.com') {
           const intervalId = setInterval(function () {
             const nav = document.body.querySelector('nav');
             if (nav) {
@@ -116,7 +116,7 @@ function coreInit() {
       true,
     );
 
-    if (window.location.host === 'chat.openai.com') {
+    if (window.location.host === 'chatgpt.com') {
       window.__sync_prompts = async function () {
         await invoke('sync_prompts', { time: Date.now() });
       };
