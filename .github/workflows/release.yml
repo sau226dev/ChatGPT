@@ -1,0 +1,99 @@
+name: Release CI
+
+on:
+  push:
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  build-chatgpt:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - build: windows
+            os: windows-latest
+            arch: x86_64
+            target: x86_64-pc-windows-msvc
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: 'Setup Rust'
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ matrix.target }}
+
+      - name: Build FE
+        run: pnpm build:fe
+
+      - name: Install rust target
+        run: rustup target add ${{ matrix.target }}
+
+      - name: fix tray icon
+        if: matrix.os != 'macos-latest'
+        run: |
+          pnpm fix:tray
+
+      - run: pnpm build --target ${{ matrix.target }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/upload-artifact@v3
+        if: matrix.os == 'windows-latest'
+        with:
+          name: artifacts-${{ matrix.arch }}
+          path: |
+            ./target/${{ matrix.target }}/release/bundle/msi/**
+
+  release-chatgpt:
+    needs: build-chatgpt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Query version number
+        run: echo "version=${GITHUB_REF:11}" >> $GITHUB_ENV
+
+      - name: Download x86_64 artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: artifacts-x86_64
+          path: artifacts/x86_64
+
+      - name: Rename artifacts
+        run: |
+
+          mv "artifacts/x86_64/ChatGPT_${{ env.version }}_x64_en-US.msi" "artifacts/ChatGPT_${{ env.version }}_windows_x86_64.msi"
+          mv "artifacts/x86_64/ChatGPT_${{ env.version }}_x64_en-US.msi.zip" "artifacts/ChatGPT_${{ env.version }}_windows_x86_64.msi.zip"
+          mv "artifacts/x86_64/ChatGPT_${{ env.version }}_x64_en-US.msi.zip.sig" "artifacts/ChatGPT_${{ env.version }}_windows_x86_64.msi.zip.sig"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.version }}
+          name: ChatGPT v${{ env.version }}
+          body: See the assets to download this version and install.
+          prerelease: false
+          generate_release_notes: false
+          files: ./artifacts/**/*
