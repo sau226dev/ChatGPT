@@ -78,8 +78,6 @@ jobs:
         run: |
 
           mv "artifacts/x86_64/ChatGPT_${{ env.version }}_x64_en-US.msi" "artifacts/ChatGPT_${{ env.version }}_windows_x86_64.msi"
-          mv "artifacts/x86_64/ChatGPT_${{ env.version }}_x64_en-US.msi.zip" "artifacts/ChatGPT_${{ env.version }}_windows_x86_64.msi.zip"
-          mv "artifacts/x86_64/ChatGPT_${{ env.version }}_x64_en-US.msi.zip.sig" "artifacts/ChatGPT_${{ env.version }}_windows_x86_64.msi.zip.sig"
 
       - name: Create Release
         uses: softprops/action-gh-release@master
