@@ -42,16 +42,8 @@ jobs:
         with:
           key: ${{ matrix.target }}
 
-      - name: Build FE
-        run: pnpm build:fe
-
       - name: Install rust target
         run: rustup target add ${{ matrix.target }}
-
-      - name: fix tray icon
-        if: matrix.os != 'macos-latest'
-        run: |
-          pnpm fix:tray
 
       - run: pnpm build --target ${{ matrix.target }}
         env:
